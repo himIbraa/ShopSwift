@@ -19,7 +19,7 @@ class CustomNavBar extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushNamed(context, '/');
               },
             ),
             IconButton(
@@ -46,7 +46,7 @@ class CustomNavBar extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/');
+                Navigator.pushNamed(context, '/category');
               },
             ),
             IconButton(
@@ -55,7 +55,7 @@ class CustomNavBar extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/chat');
+                Navigator.pushNamed(context, '/contacts');
               },
             ),
           ],

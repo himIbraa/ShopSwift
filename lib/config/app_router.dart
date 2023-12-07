@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shopswift/models/category_model.dart';
-import 'package:shopswift/models/product_model.dart';
-import 'package:shopswift/screens/cart/cart_screen.dart';
-import 'package:shopswift/screens/catalog/catalog_screen.dart';
-import 'package:shopswift/screens/product/product_screen.dart';
-import 'package:shopswift/screens/profile/my_profile.dart';
+import 'package:shopswift/models/models.dart';
+import 'package:shopswift/screens/chat/chat_screen.dart';
+import 'package:shopswift/screens/order_confirmation/oreder_confirmation_screen.dart';
 import 'package:shopswift/screens/screens.dart';
-import 'package:shopswift/screens/whishlist/whishlist_screen.dart';
-import '../screens/home/home_screen.dart';
 
 class AppRouter {
   static Route onGenerateRouter(RouteSettings settings) {
@@ -29,6 +24,22 @@ class AppRouter {
         return ContacScreen.route();
       case MyProfile.routeName:
         return MyProfile.route();
+      case CategoryScreen.routeName:
+        return CategoryScreen.route();
+      case CheckoutScreen.routeName:
+        return CheckoutScreen.route();
+      case OrderConfirmation.routeName:
+        return OrderConfirmation.route();
+      case MyShop.routeName:
+        return MyShop.route();
+      case NewProductScreen.routeName:
+        return NewProductScreen.route();
+      case AdminProductScreen.routeName:
+        return AdminProductScreen.route();
+      case OrdersScreen.routeName:
+        return OrdersScreen.route();
+      case ChatScreen.routeName:
+        return ChatScreen.route();
       default:
         return _errorRoute();
     }

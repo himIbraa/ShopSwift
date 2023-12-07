@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 ThemeData theme() {
   return ThemeData(
-      scaffoldBackgroundColor: Colors.white,
-      fontFamily: 'Avenir',
+      scaffoldBackgroundColor: Color.fromARGB(255, 235, 235, 235),
+      fontFamily: 'Poppins',
       textTheme: TextTheme());
 }
 

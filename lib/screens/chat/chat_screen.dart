@@ -1,76 +1,74 @@
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {
+  static const String routeName = '/chat';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: RouteSettings(name: routeName),
+      builder: (_) => ChatScreen(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFFF9E17E),
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              // Handle back button pressed
-            },
-          ),
-          title: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 2),
-                child: Icon(Icons.account_box_outlined, color: Colors.black),
-              ),
-              SizedBox(width: 8.0),
-              Text(
-                'User Name',
-                style: TextStyle(color: Colors.black),
-              ),
-            ],
-          ),
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF9E17E),
+        title: Row(
           children: [
-            DateIndicatorWidget('3 Nov'),
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.all(8.0),
-                children: [
-                  MessageWidget(
-                      isMe: true,
-                      text: 'Antique bookshelf still up?',
-                      time: '12:19 pm',
-                      delivered: true),
-                  MessageWidget(isMe: false, text: 'Yep', time: '12:24 pm'),
-                  MessageWidget(
-                      isMe: false,
-                      text: '6ft x 3ft x 1.5ft. Minor scratches.',
-                      time: '12:25 pm'),
-                  MessageWidget(
-                      isMe: true,
-                      text: 'delivery or pickup?',
-                      time: '12:27 pm',
-                      delivered: true),
-                  MessageWidget(
-                      isMe: false,
-                      text: 'Can deliver for a fee. Your call.',
-                      time: '12:28 pm'),
-                  MessageWidget(
-                      isMe: true,
-                      text: 'Checking pics, thx!',
-                      time: '12:28 pm',
-                      delivered: true),
-                  MessageWidget(
-                      isMe: false,
-                      text: 'Sure thing! Ask anything.',
-                      time: '12:29 pm'),
-                ],
-              ),
+            Container(
+              padding: EdgeInsets.only(left: 2),
+              child: Icon(Icons.account_box_outlined, color: Colors.black),
             ),
-            _buildMessageComposer(),
+            SizedBox(width: 8.0),
+            Text(
+              'User Name',
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
+      ),
+      body: Column(
+        children: [
+          DateIndicatorWidget('3 Nov'),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.all(8.0),
+              children: [
+                MessageWidget(
+                    isMe: true,
+                    text: 'Antique bookshelf still up?',
+                    time: '12:19 pm',
+                    delivered: true),
+                MessageWidget(isMe: false, text: 'Yep', time: '12:24 pm'),
+                MessageWidget(
+                    isMe: false,
+                    text: '6ft x 3ft x 1.5ft. Minor scratches.',
+                    time: '12:25 pm'),
+                MessageWidget(
+                    isMe: true,
+                    text: 'delivery or pickup?',
+                    time: '12:27 pm',
+                    delivered: true),
+                MessageWidget(
+                    isMe: false,
+                    text: 'Can deliver for a fee. Your call.',
+                    time: '12:28 pm'),
+                MessageWidget(
+                    isMe: true,
+                    text: 'Checking pics, thx!',
+                    time: '12:28 pm',
+                    delivered: true),
+                MessageWidget(
+                    isMe: false,
+                    text: 'Sure thing! Ask anything.',
+                    time: '12:29 pm'),
+              ],
+            ),
+          ),
+          _buildMessageComposer(),
+        ],
       ),
     );
   }

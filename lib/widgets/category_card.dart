@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shopswift/models/models.dart';
 
-class ProductCard extends StatelessWidget {
-  final Product product;
+class CategoryCard extends StatelessWidget {
+  final Category category;
   final double widthFactor;
   final double leftPosition;
-  final bool isWishlist;
 
-  const ProductCard({
-    required this.product,
+  const CategoryCard({
+    required this.category,
     this.widthFactor = 2.5,
     this.leftPosition = 0,
-    this.isWishlist = false,
     super.key,
   });
 
@@ -19,7 +17,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/product', arguments: product);
+        Navigator.pushNamed(context, '/catalog', arguments: category);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
@@ -28,9 +26,12 @@ class ProductCard extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width / widthFactor,
               height: 150,
-              child: Image.network(
-                product.imageURL,
-                fit: BoxFit.cover,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(
+                  image: NetworkImage(category.imgURL),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Positioned(
@@ -40,8 +41,17 @@ class ProductCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / widthFactor -
                     leftPosition,
                 height: 70,
-                decoration:
-                    BoxDecoration(color: Color.fromARGB(200, 19, 13, 137)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color.fromARGB(0, 26, 48, 210),
+                      Color.fromRGBO(19, 13, 137, 0.9),
+                    ],
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -53,45 +63,18 @@ class ProductCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              product.name,
+                              category.name,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge!
+                                  .headline6!
                                   .copyWith(
                                     color: Colors.white,
-                                  ),
-                            ),
-                            Text(
-                              '${product.price} DA',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                             ),
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.add_circle,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      isWishlist
-                          ? Expanded(
-                              child: IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {},
-                            ))
-                          : SizedBox(),
                     ],
                   ),
                 ),

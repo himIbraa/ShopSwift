@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopswift/widgets/widgets.dart';
+
 class MyProfile extends StatelessWidget {
   static const String routeName = '/myprofile';
   static Route route() {
@@ -11,127 +13,72 @@ class MyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xFFF5F5F5),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.black),
-                      onPressed: () {
-                        // Implement go back functionality
-                      },
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: 300, right: 300, top: 20, bottom: 20),
-                      color: Color(0xFFF9E17E),
-                      child: Text(
-                        "My Profile",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.favorite, color: Color(0xFFF5BA41)),
-                      onPressed: () {
-                        // Implement heart icon functionality
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 40),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      child:
-                          Icon(Icons.person, size: 40.0, color: Colors.black),
-                    ),
-                    SizedBox(height: 8.0),
-                    Center(
-                      child: Text(
-                        'User Name',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                buildDetailBox('User Name', Icons.edit),
-                buildDetailBox('email@email.com', Icons.edit),
-                buildDetailBox('Address', Icons.edit),
-                buildDetailBox('Phone number', Icons.edit),
-                SizedBox(height: 30),
-                Row(
-                  children: [
-                    Expanded(
-                      child: buildButton(
-                          'Change Password'), // New layout for Change Password
-                    ),
-                    SizedBox(width: 16.0),
-                    Expanded(
-                      child: buildButton('My Shop'), // New layout for My Shop
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Color(0xFFF5BA41),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Scaffold(
+      appBar: CustomAppBar(title: 'My profile'),
+      backgroundColor: Color(0xFFF5F5F5),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                onPressed: () {
-                  // Implement home button functionality
-                },
+              SizedBox(height: 40),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    child: CircleAvatar(
+                      radius: 45,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  Center(
+                    child: Text(
+                      'User Name',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Icon(Icons.shopping_cart, color: Colors.white),
-                onPressed: () {
-                  // Implement cart button functionality
-                },
+              SizedBox(height: 16.0),
+              buildDetailBox('User Name', Icons.edit),
+              buildDetailBox('email@email.com', Icons.edit),
+              buildDetailBox('Address', Icons.edit),
+              buildDetailBox('Phone number', Icons.edit),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: buildButton('Change Password', () {}),
+                  ),
+                  SizedBox(width: 16.0),
+                  Expanded(
+                    child: buildButton(
+                      'My Shop',
+                      () {
+                        Navigator.pushNamed(context, '/my-shop');
+                      },
+                    ),
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Icon(Icons.person, color: Colors.white),
-                onPressed: () {
-                  // Implement profile button functionality
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.list, color: Colors.white),
-                onPressed: () {
-                  // Implement listing button functionality
-                },
-              ),
+              SizedBox(height: 16.0),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 
@@ -140,7 +87,7 @@ class MyProfile extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: Color(0xFF6592D1),
+        color: Color.fromARGB(255, 30, 23, 161),
       ),
       padding: EdgeInsets.all(16.0),
       child: Row(
@@ -163,9 +110,7 @@ class MyProfile extends StatelessWidget {
             ),
             child: IconButton(
               icon: Icon(icon, color: Colors.black),
-              onPressed: () {
-                // Implement modify functionality
-              },
+              onPressed: () {},
             ),
           ),
         ],
@@ -173,21 +118,24 @@ class MyProfile extends StatelessWidget {
     );
   }
 
-  Widget buildButton(String label) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 100),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        color: Color(0xFF4A7FCA),
-      ),
-      padding: EdgeInsets.all(16.0),
-      child: Center(
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+  Widget buildButton(String label, VoidCallback onPressed) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: Color.fromARGB(255, 30, 23, 161),
+        ),
+        padding: EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
       ),

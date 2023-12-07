@@ -4,7 +4,7 @@ import 'package:shopswift/models/models.dart';
 import 'package:shopswift/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String routeName = '/home';
+  static const String routeName = '/';
 
   static Route route() {
     return MaterialPageRoute(
@@ -32,7 +32,10 @@ class HomeScreen extends StatelessWidget {
                 .map((category) => HeroCarouselCard(category: category))
                 .toList(),
           )),
-          sectionTitle(title: 'RECOMMENDED'),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: sectionTitle(title: 'RECOMMENDED'),
+          ),
           ProductCarousel(
               products: Product.products
                   .where((product) => product.isRecommended)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContacScreen extends StatelessWidget {
-  static const String routeName = '/chat';
+  static const String routeName = '/contacts';
 
   static Route route() {
     return MaterialPageRoute(
@@ -12,43 +12,41 @@ class ContacScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFFF9E17E),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () {
-              // Handle back button press
-            },
-          ),
-          title: Text(
-            'Messages',
-            style: TextStyle(color: Colors.black),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF9E17E),
+        title: Text(
+          'Messages',
+          style: TextStyle(color: Colors.black),
         ),
-        body: Container(
-          color: Color(0xFFF5F5F5), // Background color
-          margin: EdgeInsets.all(40),
-          child: SizedBox(
-            height: 400, // Adjust the height as needed
-            child: Card(
-              color: Colors.white, // White card color
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: ListView.builder(
-                itemCount: 4, // Set the number of boxes here
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                    child: GreyBoxWidget(),
-                  );
-                },
-              ),
+      ),
+      body: Container(
+        color: Color(0xFFF5F5F5), // Background color
+        margin: EdgeInsets.all(40),
+        child: SizedBox(
+          height: 400, // Adjust the height as needed
+          child: Card(
+            color: Colors.white, // White card color
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: ListView.builder(
+              itemCount: 4, // Set the number of boxes here
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/chat');
+                    },
+                    child: GreyBoxWidget(
+                      username: 'User name',
+                      messagesCount: 4,
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -58,6 +56,11 @@ class ContacScreen extends StatelessWidget {
 }
 
 class GreyBoxWidget extends StatelessWidget {
+  final String username;
+  final int messagesCount;
+
+  GreyBoxWidget({required this.username, required this.messagesCount});
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -75,13 +78,13 @@ class GreyBoxWidget extends StatelessWidget {
         ),
       ),
       title: Text(
-        'Username',
+        username,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       subtitle: Row(
         children: [
           Text(
-            '+3 new messages',
+            '+$messagesCount new messages',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(width: 8.0),
