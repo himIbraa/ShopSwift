@@ -15,23 +15,31 @@ class WhishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Whishlist'),
+      appBar: CustomAppBar(title: 'Wishlist'),
       bottomNavigationBar: CustomNavBar(),
-      body: GridView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1, childAspectRatio: 2.6),
-        itemCount: Product.products.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Center(
-            child: ProductCard(
-              product: Product.products[index],
-              widthFactor: 1.1,
-              leftPosition: 160,
-              isWishlist: true,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: Product.products.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    ProductCard(
+                      product: Product.products[index],
+                      widthFactor: 1.1,
+                      leftPosition: 160,
+                      isWishlist: true,
+                    ),
+                    SizedBox(height: 8.0), // Adjust the height for the gap
+                  ],
+                );
+              },
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

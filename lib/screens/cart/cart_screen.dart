@@ -18,8 +18,9 @@ class CartScreen extends StatelessWidget {
       appBar: CustomAppBar(title: 'Cart'),
       bottomNavigationBar: BottomAppBar(
         color: Color(0xFFF5BA41),
+        elevation: 0, // Remove the shadow if not needed
         child: Container(
-          height: 70,
+          height: 58,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -55,7 +56,7 @@ class CartScreen extends StatelessWidget {
                         Navigator.pushNamed(context, '/');
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 30, 23, 161),
+                        primary: Color.fromARGB(255, 0, 0, 0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -92,62 +93,7 @@ class CartScreen extends StatelessWidget {
                 CartProductCard(product: Product.products[4]),
               ],
             ),
-            Column(
-              children: [
-                Divider(
-                  thickness: 2,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40.0, vertical: 10.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text('SUBTOTAL'), Text('5000 DA')],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text('DELIVERY FEE'), Text('5000 DA')],
-                      ),
-                    ],
-                  ),
-                ),
-                Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 30, 23, 161)),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'TOTAL',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(color: Colors.white),
-                            ),
-                            Text(
-                              '10000 DA',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(color: Colors.white),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
+            OrderSummary(),
           ],
         ),
       ),

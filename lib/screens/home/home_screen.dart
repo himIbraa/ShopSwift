@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shopswift/models/models.dart';
 import 'package:shopswift/widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
 
   static Route route() {
@@ -14,16 +14,47 @@ class HomeScreen extends StatelessWidget {
   }
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  static List<Product> recommendedProducts =
+      Product.products.where((product) => product.isRecommended).toList();
+  static List<Product> popularProducts =
+      Product.products.where((product) => product.isPopular).toList();
+
+  final PageController _pageController = PageController(
+    viewportFraction: 1.0,
+  );
+
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        _currentPage = _pageController.page!.round();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Shop Swift'),
+      appBar: CustomAppBar(title: 'ShopSwift'),
       bottomNavigationBar: CustomNavBar(),
       body: Column(
         children: [
-          Container(
-              child: CarouselSlider(
+          CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 1.5,
+              aspectRatio: 1.4,
               viewportFraction: 0.9,
               enlargeStrategy: CenterPageEnlargeStrategy.height,
               enlargeCenterPage: true,
@@ -31,20 +62,84 @@ class HomeScreen extends StatelessWidget {
             items: Category.categories
                 .map((category) => HeroCarouselCard(category: category))
                 .toList(),
-          )),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: sectionTitle(title: 'RECOMMENDED'),
           ),
-          ProductCarousel(
-              products: Product.products
-                  .where((product) => product.isRecommended)
-                  .toList()),
-          sectionTitle(title: 'POPULAR'),
-          ProductCarousel(
-              products: Product.products
-                  .where((product) => product.isPopular)
-                  .toList()),
+          Padding(
+            padding: const EdgeInsets.only(top: 5.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildTitle('RECOMMENDED', 0),
+                _buildTitle('POPULAR', 1),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: PageView.builder(
+                controller: _pageController,
+                scrollDirection: Axis.horizontal,
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: index == 0
+                        ? recommendedProducts.length
+                        : popularProducts.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      final product = index == 0
+                          ? recommendedProducts[i]
+                          : popularProducts[i];
+
+                      return ProductCard(
+                        product: product,
+                        widthFactor: 2.3,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _animateToPage(int index) {
+    _pageController.animateToPage(
+      index,
+      duration: Duration(milliseconds: 100),
+      curve: Curves.easeInOut, // Adjust the curve as needed
+    );
+  }
+
+  Widget _buildTitle(String title, int index) {
+    bool isSelected = _currentPage == index;
+
+    return InkWell(
+      onTap: () {
+        _animateToPage(index);
+      },
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color: isSelected ? Colors.blue : Colors.black,
+            ),
+          ),
+          SizedBox(height: 4.0),
+          Container(
+            height: isSelected ? 2.0 : 0.0,
+            width: 120.0,
+            color: Colors.blue,
+          ),
+          SizedBox(height: 4.0),
         ],
       ),
     );

@@ -23,46 +23,46 @@ class Product extends Equatable {
 
   static List<Product> products = [
     Product(
-      name: 'Product 01',
+      name: 'MacBook M1 pro 2022 12"',
       imageURL:
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
+          'https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Computers',
       price: 2000,
       isRecommended: true,
       isPopular: false,
     ),
     Product(
-      name: 'Product 02',
+      name: 'Dell Xps 13"',
       imageURL:
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
+          'https://images.unsplash.com/photo-1567521463850-4939134bcd4a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Computers',
       price: 500,
       isRecommended: true,
       isPopular: true,
     ),
     Product(
-      name: 'Product 03',
+      name: 'Cheverolet coupe',
       imageURL:
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
-      price: 200,
+          'https://images.unsplash.com/photo-1521657249896-063c0c611fe5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Cars',
+      price: 200000,
       isRecommended: true,
       isPopular: true,
     ),
     Product(
-      name: 'Product 04',
+      name: 'Mercedes G-class',
       imageURL:
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
-      price: 1600,
+          'https://images.unsplash.com/photo-1590079287659-96668805ef23?q=80&w=2005&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Cars',
+      price: 16000000,
       isRecommended: true,
       isPopular: true,
     ),
     Product(
-      name: 'Product 05',
+      name: 'Shelf',
       imageURL:
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
+          'https://images.unsplash.com/photo-1602990721338-9cbb5b983c4d?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      category: 'Furniture',
       price: 2340,
       isRecommended: false,
       isPopular: true,
@@ -71,7 +71,7 @@ class Product extends Equatable {
       name: 'Product 06',
       imageURL:
           'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
+      category: 'Category 04',
       price: 600,
       isRecommended: true,
       isPopular: true,
@@ -80,7 +80,7 @@ class Product extends Equatable {
       name: 'Product 07',
       imageURL:
           'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      category: 'Category 01',
+      category: 'Category 04',
       price: 3300,
       isRecommended: false,
       isPopular: true,

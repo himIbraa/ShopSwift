@@ -7,8 +7,9 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-        key: UniqueKey(),
+    return SizedBox(
+      height: 58.0, // Adjust the height as needed
+      child: BottomAppBar(
         color: Color(0xFFF5BA41),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -59,6 +60,8 @@ class CustomNavBar extends StatelessWidget {
               },
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopswift/models/admin_product_model.dart';
 import 'package:shopswift/models/product_model.dart';
-
-import '../screens.dart';
+import 'package:shopswift/screens/screens.dart';
 
 class AdminProductScreen extends StatelessWidget {
   static const String routeName = '/my-product';
@@ -76,14 +75,17 @@ class AdminProductScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: Product.products.length,
+                itemCount: AdminProduct.adminproducts.length,
                 itemBuilder: (context, index) {
-                  return SizedBox(
-                    height: 210,
-                    child: ProductCard(
-                      product: AdminProduct.adminproducts[index],
-                    ),
-                  );
+                  if (index < AdminProduct.adminproducts.length) {
+                    return SizedBox(
+                      height: 210,
+                      child: ProductCard(
+                        product: AdminProduct.adminproducts[index],
+                      ),
+                    );
+                  }
+                  return SizedBox.shrink();
                 },
               ),
             ),
@@ -153,7 +155,7 @@ class ProductCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 300,
+                            width: 180,
                             height: 40,
                             child: TextField(
                               keyboardType: TextInputType.number,
@@ -179,12 +181,11 @@ class ProductCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 300,
+                            width: 180,
                             height: 40,
                             child: TextField(
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                labelText: 'Enter quantity',
                                 hintText: '${product.quantity}',
                               ),
                               onChanged: (value) {},

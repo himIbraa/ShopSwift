@@ -40,8 +40,16 @@ class ProductCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / widthFactor -
                     leftPosition,
                 height: 70,
-                decoration:
-                    BoxDecoration(color: Color.fromARGB(200, 19, 13, 137)),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Color.fromARGB(199, 0, 0, 0),
+                    ],
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -59,6 +67,7 @@ class ProductCard extends StatelessWidget {
                                   .bodyLarge!
                                   .copyWith(
                                     color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                             ),
                             Text(
@@ -85,12 +94,13 @@ class ProductCard extends StatelessWidget {
                       isWishlist
                           ? Expanded(
                               child: IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.white,
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {},
                               ),
-                              onPressed: () {},
-                            ))
+                            )
                           : SizedBox(),
                     ],
                   ),

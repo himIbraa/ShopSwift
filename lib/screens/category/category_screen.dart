@@ -13,27 +13,34 @@ class CategoryScreen extends StatelessWidget {
   }
 
   const CategoryScreen();
+
   @override
   Widget build(BuildContext context) {
     final List<Category> category = Category.categories.toList();
+
     return Scaffold(
-        appBar: CustomAppBar(
-          title: 'Category',
-        ),
-        bottomNavigationBar: CustomNavBar(),
-        body: GridView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1, childAspectRatio: 2.7),
+      appBar: CustomAppBar(
+        title: 'Category',
+      ),
+      bottomNavigationBar: CustomNavBar(),
+      body: SingleChildScrollView(
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemCount: category.length,
           itemBuilder: (BuildContext context, int index) {
-            return Center(
-              child: CategoryCard(
-                category: category[index],
-                widthFactor: 1.1,
-              ),
+            return Column(
+              children: [
+                CategoryCard(
+                  category: category[index],
+                  widthFactor: 1.1,
+                ),
+                SizedBox(height: 18.0),
+              ],
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 }

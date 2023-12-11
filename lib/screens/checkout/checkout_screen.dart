@@ -36,56 +36,58 @@ class CheckoutScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20.0,
-          vertical: 10.0,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'CUSTOMER INFORMATION',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                CustomTextFormField(
-                  title: 'Full Name',
-                  onChanged: (value) {},
-                ),
-                CustomTextFormField(
-                  title: 'Phone number',
-                  onChanged: (value) {},
-                ),
-                CustomTextFormField(
-                  title: 'Email',
-                  onChanged: (value) {},
-                ),
-                SizedBox(height: 30),
-                Text(
-                  'DELIVERY INFORMATION',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                CustomTextFormField(
-                  title: 'Address',
-                  onChanged: (value) {},
-                ),
-                CustomTextFormField(
-                  title: 'City',
-                  onChanged: (value) {},
-                ),
-                CustomTextFormField(
-                  title: 'POSTAL Code',
-                  onChanged: (value) {},
-                ),
-              ],
-            ),
-            OrderSummary(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 10.0,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'CUSTOMER INFORMATION',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  CustomTextFormField(
+                    title: 'Full Name',
+                    onChanged: (value) {},
+                  ),
+                  CustomTextFormField(
+                    title: 'Phone number',
+                    onChanged: (value) {},
+                  ),
+                  CustomTextFormField(
+                    title: 'Email',
+                    onChanged: (value) {},
+                  ),
+                  SizedBox(height: 30),
+                  Text(
+                    'DELIVERY INFORMATION',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  CustomTextFormField(
+                    title: 'Address',
+                    onChanged: (value) {},
+                  ),
+                  CustomTextFormField(
+                    title: 'City',
+                    onChanged: (value) {},
+                  ),
+                  CustomTextFormField(
+                    title: 'POSTAL Code',
+                    onChanged: (value) {},
+                  ),
+                ],
+              ),
+              OrderSummary(),
+            ],
+          ),
         ),
       ),
     );

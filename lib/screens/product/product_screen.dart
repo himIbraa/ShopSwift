@@ -24,8 +24,9 @@ class ProductScreen extends StatelessWidget {
         color: Color(0xFFF5BA41),
         child: Container(
           height: 70,
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 onPressed: () {},
@@ -57,7 +58,7 @@ class ProductScreen extends StatelessWidget {
         children: [
           CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 1.5,
+              aspectRatio: 1.4,
               viewportFraction: 0.9,
               enlargeStrategy: CenterPageEnlargeStrategy.height,
               enlargeCenterPage: true,
@@ -69,45 +70,48 @@ class ProductScreen extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width - 10,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 30, 23, 161),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          product.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Colors.white),
-                        ),
-                        Text(
-                          '${product.price} DA',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .copyWith(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 01),
+            child: Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(117, 0, 0, 0),
+                    Color.fromRGBO(0, 0, 0, 1),
+                  ],
                 ),
-              ],
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      product.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Colors.white),
+                    ),
+                    Text(
+                      '${product.price} DA',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -118,7 +122,8 @@ class ProductScreen extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 35,
                     backgroundImage: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                    ),
                   ),
                 ),
                 SizedBox(width: 20),
@@ -142,7 +147,7 @@ class ProductScreen extends StatelessWidget {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: ExpansionTile(
               initiallyExpanded: false,
               title: Text(
@@ -165,7 +170,7 @@ class ProductScreen extends StatelessWidget {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: ExpansionTile(
               initiallyExpanded: false,
               title: Text(

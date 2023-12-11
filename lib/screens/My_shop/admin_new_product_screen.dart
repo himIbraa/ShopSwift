@@ -18,6 +18,15 @@ class NewProductScreen extends StatefulWidget {
 }
 
 class _NewProductScreenState extends State<NewProductScreen> {
+  final TextEditingController _productIdController = TextEditingController();
+  final TextEditingController _productNameController = TextEditingController();
+  final TextEditingController _productDescriptionController =
+      TextEditingController();
+  final TextEditingController _productCategoryController =
+      TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,129 +41,114 @@ class _NewProductScreenState extends State<NewProductScreen> {
         ),
         backgroundColor: Color(0xFFF5BA41),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () async {
-                ImagePicker _picker = ImagePicker();
-                final XFile? _image =
-                    await _picker.pickImage(source: ImageSource.gallery);
-
-                if (_image == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('No image was selected.'),
-                    ),
-                  );
-                }
-              },
-              child: SizedBox(
-                height: 100,
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  color: Color(0xFFF5BA41),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          ImagePicker _picker = ImagePicker();
-                          final XFile? _image = await _picker.pickImage(
-                              source: ImageSource.gallery);
-
-                          if (_image == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('No image was selected.'),
-                              ),
-                            );
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.add_circle,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const Text(
-                        'Add an Image',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildImagePicker(),
+              const SizedBox(height: 20),
+              const Text(
+                'Product Information',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Product Information',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            _buildTextFormField('Product ID'),
-            _buildTextFormField('Product Name'),
-            _buildTextFormField('Product Description'),
-            _buildTextFormField('Product Category'),
-            const SizedBox(height: 30),
-            _buildTextFormField('Price'),
-            _buildTextFormField('Quantity'),
-            const SizedBox(height: 10),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  print('Saved');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFF5BA41),
-                ),
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-            ),
-          ],
+              _buildTextFormField('Product ID', _productIdController),
+              _buildTextFormField('Product Name', _productNameController),
+              _buildTextFormField(
+                  'Product Description', _productDescriptionController),
+              _buildTextFormField(
+                  'Product Category', _productCategoryController),
+              const SizedBox(height: 30),
+              _buildTextFormField('Price', _priceController),
+              _buildTextFormField('Quantity', _quantityController),
+              const SizedBox(height: 20),
+              _buildSaveButton(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Row _buildCheckbox(String title) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 125,
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+  Widget _buildImagePicker() {
+    return InkWell(
+      onTap: _selectImage,
+      child: SizedBox(
+        height: 100,
+        child: Card(
+          margin: EdgeInsets.zero,
+          color: Color(0xFFF5BA41),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: _selectImage,
+                icon: const Icon(
+                  Icons.add_circle,
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'Add an Image',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
-        Checkbox(
-          value: true,
-          checkColor: Colors.black,
-          activeColor: Colors.black12,
-          onChanged: (value) {},
-        ),
-      ],
+      ),
     );
   }
 
-  TextFormField _buildTextFormField(String hintText) {
+  void _selectImage() async {
+    ImagePicker _picker = ImagePicker();
+    final XFile? _image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (_image == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No image was selected.'),
+        ),
+      );
+    }
+  }
+
+  Widget _buildTextFormField(
+      String hintText, TextEditingController controller) {
     return TextFormField(
-      decoration: InputDecoration(hintText: hintText),
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+      ),
+    );
+  }
+
+  Widget _buildSaveButton() {
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          // Implement save functionality
+          print('Saved');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFF5BA41),
+        ),
+        child: const Text(
+          'Save',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
