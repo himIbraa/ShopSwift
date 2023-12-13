@@ -4,7 +4,7 @@ import 'package:shopswift/models/models.dart';
 import 'package:shopswift/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String routeName = '/';
+  static const String routeName = '/home';
 
   static Route route() {
     return MaterialPageRoute(

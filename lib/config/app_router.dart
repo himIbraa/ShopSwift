@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopswift/models/models.dart';
 import 'package:shopswift/screens/chat/chat_screen.dart';
+import 'package:shopswift/screens/login/login_screen.dart';
 import 'package:shopswift/screens/order_confirmation/oreder_confirmation_screen.dart';
 import 'package:shopswift/screens/screens.dart';
 
@@ -40,6 +41,12 @@ class AppRouter {
         return OrdersScreen.route();
       case ChatScreen.routeName:
         return ChatScreen.route();
+      case LoginScreen.routeName:
+        return LoginScreen.route();
+      case SignUpScreen.routeName:
+        return SignUpScreen.route();
+      case WelcomeScreen.routeName:
+        return WelcomeScreen.route();
       default:
         return _errorRoute();
     }

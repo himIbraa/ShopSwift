@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+class SignUpScreen extends StatelessWidget {
+  static const String routeName = '/signup';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SignUpScreen(),
+  static Route route() {
+    return MaterialPageRoute(
+      settings: RouteSettings(name: routeName),
+      builder: (_) => SignUpScreen(),
     );
   }
-}
 
-class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // Set this property to false
       backgroundColor: Color(0xFFF5F5F5),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  // Adjust height and width as needed
+                Image.asset(
+                  'assets/images/logo.png',
                   width: 260,
                   height: 240,
-                  child: Image.asset('assets/images/logo.png'),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 Text(
                   'Welcome',
                   style: TextStyle(
@@ -41,7 +37,7 @@ class SignUpScreen extends StatelessWidget {
                     color: Color(0xFF4A7FCA),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 SignUpForm(),
                 SizedBox(height: 10),
                 Row(
@@ -51,10 +47,7 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(width: 8),
                     Text(
                       'Receive Updates',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                      ),
+                      style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ],
                 ),
@@ -62,11 +55,12 @@ class SignUpScreen extends StatelessWidget {
                 Text(
                   'By creating an account, you agree to our Terms of Service and Privacy Policy.',
                   style: TextStyle(fontSize: 12, color: Colors.black),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 GestureDetector(
                   onTap: () {
-                    // Handle "I have an account" click
+                    Navigator.pushNamed(context, '/login');
                   },
                   child: Text(
                     'I have an account',
@@ -77,10 +71,10 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle Sign Up button click
+                    Navigator.pushNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xFFF5BA41),
@@ -90,7 +84,9 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 10.0),
+                      horizontal: 20.0,
+                      vertical: 10.0,
+                    ),
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
@@ -99,10 +95,10 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 OutlinedButton(
                   onPressed: () {
-                    // Handle Skip button click
+                    Navigator.pushNamed(context, '/home');
                   },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.black, width: 2.0),
@@ -112,7 +108,9 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 10.0),
+                      horizontal: 30.0,
+                      vertical: 10.0,
+                    ),
                     child: Text(
                       'Skip',
                       style: TextStyle(
@@ -146,8 +144,7 @@ class SignUpForm extends StatelessWidget {
 
   Widget buildTextField(String label, IconData icon) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: TextFormField(
         style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
@@ -161,24 +158,28 @@ class SignUpForm extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           ),
           filled: true,
-          fillColor: Colors.white, // Set background color to white
-          prefixIcon: Container(
-            width: 48,
-            child: Row(
-              children: [
-                SizedBox(width: 10),
-                Icon(icon, color: Colors.black),
-                SizedBox(width: 8),
-                Container(
-                  width: 2,
-                  height: 50, // Set the height to match the text field
-                  color: Colors.black,
-                ),
-                SizedBox(width: 4),
-              ],
-            ),
-          ),
+          fillColor: Colors.white,
+          prefixIcon: buildPrefixIcon(icon),
         ),
+      ),
+    );
+  }
+
+  Widget buildPrefixIcon(IconData icon) {
+    return Container(
+      width: 48,
+      child: Row(
+        children: [
+          SizedBox(width: 10),
+          Icon(icon, color: Colors.black),
+          SizedBox(width: 8),
+          Container(
+            width: 2,
+            height: 50,
+            color: Colors.black,
+          ),
+          SizedBox(width: 4),
+        ],
       ),
     );
   }

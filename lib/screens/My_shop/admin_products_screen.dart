@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopswift/models/admin_product_model.dart';
-import 'package:shopswift/models/product_model.dart';
 import 'package:shopswift/screens/screens.dart';
 
 class AdminProductScreen extends StatelessWidget {

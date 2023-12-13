@@ -91,12 +91,16 @@ class ProductScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      product.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5!
-                          .copyWith(color: Colors.white),
+                    Expanded(
+                      child: Text(
+                        product.name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .copyWith(color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                     ),
                     Text(
                       '${product.price} DA',
@@ -104,10 +108,11 @@ class ProductScreen extends StatelessWidget {
                           .textTheme
                           .headline6!
                           .copyWith(color: Colors.white),
-                    )
+                    ),
                   ],
                 ),
               ),
+
             ),
           ),
           Padding(

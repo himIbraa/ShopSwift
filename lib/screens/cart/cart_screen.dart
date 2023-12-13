@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
       appBar: CustomAppBar(title: 'Cart'),
       bottomNavigationBar: BottomAppBar(
         color: Color(0xFFF5BA41),
-        elevation: 0, // Remove the shadow if not needed
+        elevation: 0,
         child: Container(
           height: 58,
           child: Row(
@@ -53,7 +53,7 @@ class CartScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/');
+                        Navigator.pushNamed(context, '/home');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 0, 0, 0),

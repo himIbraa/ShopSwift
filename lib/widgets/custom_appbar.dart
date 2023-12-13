@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(400),
+      preferredSize: Size.fromHeight(70), // Adjust the desired height here
       child: Padding(
         padding: EdgeInsets.only(top: 10),
         child: AppBar(
@@ -31,8 +31,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             // Add top padding here
             child: Center(
               child: Container(
+                margin: EdgeInsets.only(top: 20),
+
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   border: Border.all(color: Color(0xFFF5BA41), width: 2.0),
                   borderRadius: BorderRadius.circular(10.0),
@@ -40,13 +42,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 18.0, vertical: 3),
-                  child: Text(
-                    this.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4!
-                        .copyWith(color: Colors.white),
+                  const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      width: 140, // Set your desired fixed width
+                      child: Text(
+                        this.title,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline4!
+                            .copyWith(color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1, // Adjust the number of lines you want to show
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -17,34 +17,37 @@ class MyProfile extends StatelessWidget {
       appBar: CustomAppBar(title: 'My Profile'),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 40),
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(
-                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+        physics: NeverScrollableScrollPhysics(), // Disable scrolling
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 0),
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                ),
               ),
-            ),
-            SizedBox(height: 16.0),
-            Text(
-              'User Name',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16.0),
-            buildDetailBox('User Name'),
-            buildDetailBox('email@email.com'),
-            buildDetailBox('Address'),
-            buildDetailBox('Phone number'),
-            SizedBox(height: 30),
-            buildButton('Change Password', () {}),
-            SizedBox(height: 16.0),
-            buildButton('My Shop', () {
-              Navigator.pushNamed(context, '/my-shop');
-            }),
-          ],
+              SizedBox(height: 10.0),
+              Text(
+                'User Name',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10.0),
+              buildDetailBox('User Name'),
+              buildDetailBox('email@email.com'),
+              buildDetailBox('Address'),
+              buildDetailBox('Phone number'),
+              SizedBox(height: 20),
+              buildButton('Change Password', () {}),
+              SizedBox(height: 1.0),
+              buildButton('My Shop', () {
+                Navigator.pushNamed(context, '/my-shop');
+              }),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: CustomNavBar(),
