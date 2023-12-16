@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _userNameTextController = TextEditingController();
   static const String routeName = '/signup';
 
   static Route route() {
@@ -38,7 +41,16 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                SignUpForm(),
+              Column(
+                children: [
+                  buildTextField('Username', Icons.person,false,
+                      _userNameTextController),
+                  buildTextField('Email', Icons.email,false,
+                      _userNameTextController),
+                  buildTextField('Password', Icons.lock,false,
+                      _userNameTextController),
+                ],
+              ),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -126,44 +138,35 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class SignUpForm extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        buildTextField('Username', Icons.person),
-        buildTextField('Email', Icons.email),
-        buildTextField('Phone Number', Icons.phone),
-        buildTextField('Password', Icons.lock),
-        buildTextField('Confirm Password', Icons.lock),
-      ],
-    );
-  }
-
-  Widget buildTextField(String label, IconData icon) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      child: TextFormField(
-        style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(color: Colors.black),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 2.0),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: buildPrefixIcon(icon),
+  Widget buildTextField(String label, IconData icon,bool isPasswordType,
+      TextEditingController controller) {
+    return TextField(
+      controller: controller,
+      obscureText: isPasswordType,
+      enableSuggestions: !isPasswordType,
+      autocorrect: !isPasswordType,
+      cursorColor: Colors.white,
+      style: TextStyle(color: Colors.white.withOpacity(0.9)),
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          icon,
+          color: Colors.white70,
         ),
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
+        filled: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        fillColor: Colors.white.withOpacity(0.3),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
       ),
+      keyboardType: isPasswordType
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
     );
   }
+
 
   Widget buildPrefixIcon(IconData icon) {
     return Container(
@@ -183,4 +186,35 @@ class SignUpForm extends StatelessWidget {
       ),
     );
   }
+  Container firebaseUIButton(BuildContext context, String title, Function onTap) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+      child: ElevatedButton(
+        onPressed: () {
+          onTap();
+        },
+        child: Text(
+          title,
+          style: const TextStyle(
+              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Colors.black26;
+              }
+              return Colors.white;
+            }),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      ),
+    );
+  }
 }
+
+
+
+

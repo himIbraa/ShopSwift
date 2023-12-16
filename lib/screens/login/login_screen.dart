@@ -1,17 +1,9 @@
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:shopswift/databases/dbhelper.dart';
-import 'package:shopswift/models/models.dart';
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-
-
-
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
 
   static const String routeName = '/login';
 
@@ -24,7 +16,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       body: Center(
@@ -36,14 +27,50 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  '',
+                  '../../../assets/images/logo_no_background.png',
                   width: 260,
                   height: 240,
                 ),
                 SizedBox(height: 10),
-                LogInForm(),
-                SizedBox(height: 10),
+              Column(
+                children: [
+                  buildSocial('Login with Facebook', Icons.facebook),
+                  buildSocial('Login with Google', Icons.circle),
+                  SizedBox(height: 10),
+                  Text(
+                    'OR',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4A7FCA),
+                    ),
+                  ),
+                  SizedBox(height: 0),
+                  Text(
+                    'Continue with email',
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  SizedBox(height: 20),
+                  buildTextField('Email', Icons.email,false,
+                      _emailTextController),
+                  buildTextField('Password', Icons.lock,true,
+                      _passwordTextController),
+                  firebaseUIButton(context, "Log In", () {
+                    FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                        email: _emailTextController.text,
+                        password: _passwordTextController.text)
+                        .then((value) {
+                      Navigator.pushNamed(context,'/home');
+                    }).onError((error, stackTrace) {
+                      print("Error ${error.toString()}");
+                    });
+                  }),
 
+                ],
+
+              ),
+                SizedBox(height: 10),
                 SizedBox(height: 10),
                 Text(
                   'By creating an account, you agree to our Terms of Service and Privacy Policy.',
@@ -71,13 +98,12 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                   ],
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                   //
+                    //
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xFFF5BA41),
@@ -118,64 +144,42 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+
               ],
+
             ),
+
           ),
         ),
       ),
     );
   }
-}
-
-class LogInForm extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        buildSocial('Login with Facebook', Icons.facebook),
-        buildSocial('Login with Google', Icons.circle),
-        SizedBox(height: 10),
-        Text(
-          'OR',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF4A7FCA),
-          ),
+  Widget buildTextField(String label, IconData icon,bool isPasswordType,
+      TextEditingController controller) {
+    return TextField(
+      controller: controller,
+      obscureText: isPasswordType,
+      enableSuggestions: !isPasswordType,
+      autocorrect: !isPasswordType,
+      cursorColor: Colors.white,
+      style: TextStyle(color: Colors.white.withOpacity(0.9)),
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          icon,
+          color: Colors.white70,
         ),
-        SizedBox(height: 0),
-        Text(
-          'Continue with email',
-          style: TextStyle(fontSize: 16, color: Colors.black),
-        ),
-        SizedBox(height: 20),
-        buildTextField('Email', Icons.email),
-        buildTextField('Password', Icons.lock),
-      ],
-    );
-  }
-
-  Widget buildTextField(String label, IconData icon) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(color: Colors.black),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 2.0),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: buildPrefixIcon(icon),
-        ),
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
+        filled: true,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        fillColor: Colors.white.withOpacity(0.3),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
       ),
+      keyboardType: isPasswordType
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
     );
   }
 
@@ -199,7 +203,6 @@ class LogInForm extends StatelessWidget {
   }
 
   Widget buildSocial(String label, IconData icon) {
-
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.symmetric(vertical: 15),
@@ -207,7 +210,6 @@ class LogInForm extends StatelessWidget {
         onPressed: () {
           // Handle button click
         },
-
         style: ElevatedButton.styleFrom(
           primary: Colors.white,
           onPrimary: Colors.black,
@@ -233,4 +235,38 @@ class LogInForm extends StatelessWidget {
       ),
     );
   }
+  Container firebaseUIButton(BuildContext context, String title, Function onTap) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+      child: ElevatedButton(
+        onPressed: () {
+          onTap();
+        },
+        child: Text(
+          title,
+          style: const TextStyle(
+              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Colors.black26;
+              }
+              return Colors.white;
+            }),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      ),
+    );
+  }
 }
+
+
+
+
+
+
+

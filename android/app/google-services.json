@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "868737779025",
+    "project_id": "shopswift-a0f97",
+    "storage_bucket": "shopswift-a0f97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868737779025:android:d8ec6338761602afff3f70",
+        "android_client_info": {
+          "package_name": "com.example.shopswift"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPLIo_mCqCGU653zR__3V7lIQ8HxF-Lgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

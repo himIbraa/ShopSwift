@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/welcome_image.png', // Replace with your welcome image
+                  '../../../assets/images/logo_no_background.png',
                   width: 260,
                   height: 240,
                 ),
