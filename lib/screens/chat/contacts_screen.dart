@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class ContacScreen extends StatelessWidget {
   static const String routeName = '/contacts';
 
+  const ContacScreen({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => ContacScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const ContacScreen(),
     );
   }
 
@@ -14,15 +16,15 @@ class ContacScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFF9E17E),
-        title: Text(
+        backgroundColor: const Color(0xFFF9E17E),
+        title: const Text(
           'Messages',
           style: TextStyle(color: Colors.black),
         ),
       ),
       body: Container(
-        color: Color(0xFFF5F5F5), // Background color
-        margin: EdgeInsets.all(40),
+        color: const Color(0xFFF5F5F5), // Background color
+        margin: const EdgeInsets.all(40),
         child: SizedBox(
           height: 400, // Adjust the height as needed
           child: Card(
@@ -35,12 +37,12 @@ class ContacScreen extends StatelessWidget {
               itemCount: 4, // Set the number of boxes here
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(context, '/chat');
                     },
-                    child: GreyBoxWidget(
+                    child: const GreyBoxWidget(
                       username: 'User name',
                       messagesCount: 4,
                     ),
@@ -59,19 +61,19 @@ class GreyBoxWidget extends StatelessWidget {
   final String username;
   final int messagesCount;
 
-  GreyBoxWidget({required this.username, required this.messagesCount});
+  const GreyBoxWidget({super.key, required this.username, required this.messagesCount});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.all(8.0),
-      tileColor: Color(0xFFEDF2FA), // Grey box color
+      contentPadding: const EdgeInsets.all(8.0),
+      tileColor: const Color(0xFFEDF2FA), // Grey box color
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
       leading: Container(
-        margin: EdgeInsets.only(left: 20),
-        child: Icon(
+        margin: const EdgeInsets.only(left: 20),
+        child: const Icon(
           Icons.account_box_outlined,
           color: Colors.black,
           size: 55,
@@ -79,19 +81,19 @@ class GreyBoxWidget extends StatelessWidget {
       ),
       title: Text(
         username,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       subtitle: Row(
         children: [
           Text(
             '+$messagesCount new messages',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Container(
             width: 10.0,
             height: 10.0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.green,
             ),

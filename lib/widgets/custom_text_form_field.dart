@@ -40,13 +40,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius:
                       BorderRadius.circular(15.0), // Adjust the radius
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: const BorderSide(color: Colors.black),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius:
                       BorderRadius.circular(20.0), // Adjust the radius
                   borderSide:
-                      BorderSide(color: Color.fromARGB(255, 179, 179, 179)),
+                      const BorderSide(color: Color.fromARGB(255, 179, 179, 179)),
                 ),
                 border: OutlineInputBorder(
                   borderRadius:

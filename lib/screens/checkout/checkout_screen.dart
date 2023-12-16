@@ -4,26 +4,28 @@ import '/widgets/widgets.dart';
 class CheckoutScreen extends StatelessWidget {
   static const String routeName = '/checkout';
 
+  const CheckoutScreen({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => CheckoutScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const CheckoutScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Checkout'),
+      appBar: const CustomAppBar(title: 'Checkout'),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFFF5BA41),
-        child: Container(
+        color: const Color(0xFFF5BA41),
+        child: SizedBox(
           height: 70,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.white),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                 onPressed: () {
                   Navigator.pushNamed(context, '/order-confirmation');
                 },
@@ -47,7 +49,7 @@ class CheckoutScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Text(
@@ -66,7 +68,7 @@ class CheckoutScreen extends StatelessWidget {
                     title: 'Email',
                     onChanged: (value) {},
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
                     'DELIVERY INFORMATION',
                     style: Theme.of(context).textTheme.bodyLarge,
@@ -85,7 +87,7 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              OrderSummary(),
+              const OrderSummary(),
             ],
           ),
         ),

@@ -22,7 +22,7 @@ class Product extends Equatable {
       [name, category, imageURL, price, isRecommended, isPopular];
 
   static List<Product> products = [
-    Product(
+    const Product(
       name: 'MacBook M1 pro 2022 12"',
       imageURL:
           'https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -31,7 +31,7 @@ class Product extends Equatable {
       isRecommended: true,
       isPopular: false,
     ),
-    Product(
+    const Product(
       name: 'Dell Xps 13"',
       imageURL:
           'https://images.unsplash.com/photo-1567521463850-4939134bcd4a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -40,7 +40,7 @@ class Product extends Equatable {
       isRecommended: true,
       isPopular: true,
     ),
-    Product(
+    const Product(
       name: 'Cheverolet coupe',
       imageURL:
           'https://images.unsplash.com/photo-1521657249896-063c0c611fe5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -49,7 +49,7 @@ class Product extends Equatable {
       isRecommended: true,
       isPopular: true,
     ),
-    Product(
+    const Product(
       name: 'Mercedes G-class',
       imageURL:
           'https://images.unsplash.com/photo-1590079287659-96668805ef23?q=80&w=2005&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -58,7 +58,7 @@ class Product extends Equatable {
       isRecommended: true,
       isPopular: true,
     ),
-    Product(
+    const Product(
       name: 'Shelf',
       imageURL:
           'https://images.unsplash.com/photo-1602990721338-9cbb5b983c4d?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -67,7 +67,7 @@ class Product extends Equatable {
       isRecommended: false,
       isPopular: true,
     ),
-    Product(
+    const Product(
       name: 'Product 06',
       imageURL:
           'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
@@ -76,7 +76,7 @@ class Product extends Equatable {
       isRecommended: true,
       isPopular: true,
     ),
-    Product(
+    const Product(
       name: 'Product 07',
       imageURL:
           'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',

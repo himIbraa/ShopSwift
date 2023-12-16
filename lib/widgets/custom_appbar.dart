@@ -11,17 +11,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(70), // Adjust the desired height here
+      preferredSize: const Size.fromHeight(70), // Adjust the desired height here
       child: Padding(
-        padding: EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 10),
         child: AppBar(
-          backgroundColor: Color.fromARGB(0, 0, 0, 0),
+          backgroundColor: const Color.fromARGB(0, 0, 0, 0),
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           actions: [
             IconButton(
-              icon: Icon(Icons.favorite),
-              color: Color.fromARGB(255, 207, 187, 106),
+              icon: const Icon(Icons.favorite),
+              color: const Color.fromARGB(255, 207, 187, 106),
               onPressed: () {
                 Navigator.pushNamed(context, '/whishlist');
               },
@@ -31,14 +31,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             // Add top padding here
             child: Center(
               child: Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20),
 
                 padding:
                 const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFF5BA41), width: 2.0),
+                  border: Border.all(color: const Color(0xFFF5BA41), width: 2.0),
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Color(0xFFF9E17E),
+                  color: const Color(0xFFF9E17E),
                 ),
                 child: Padding(
                   padding:
@@ -48,11 +48,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: SizedBox(
                       width: 140, // Set your desired fixed width
                       child: Text(
-                        this.title,
+                        title,
                         textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
-                            .headline4!
+                            .headlineMedium!
                             .copyWith(color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1, // Adjust the number of lines you want to show
@@ -69,5 +69,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(70); // Set the desired height here
+  Size get preferredSize => const Size.fromHeight(70); // Set the desired height here
 }

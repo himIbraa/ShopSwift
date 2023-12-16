@@ -13,8 +13,8 @@ class CartProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         border: Border.all(color: Colors.grey.shade300, width: 1.0),
       ),
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         children: [
           ClipRRect(
@@ -26,7 +26,7 @@ class CartProductCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,7 @@ class CartProductCard extends StatelessWidget {
                   product.name,
                   style: Theme.of(context).textTheme.bodyLarge!,
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   '${product.price} DA',
                   style: Theme.of(context).textTheme.bodyMedium!,
@@ -43,7 +43,7 @@ class CartProductCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
@@ -53,7 +53,7 @@ class CartProductCard extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.remove),
+                  icon: const Icon(Icons.remove),
                   color: Colors.black,
                 ),
                 Padding(
@@ -65,7 +65,7 @@ class CartProductCard extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   color: Colors.black,
                 ),
               ],

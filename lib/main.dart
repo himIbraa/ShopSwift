@@ -7,10 +7,12 @@ import 'screens/screens.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: theme(),
       onGenerateRoute: AppRouter.onGenerateRouter,
       initialRoute: WelcomeScreen.routeName,
-      home: WelcomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }

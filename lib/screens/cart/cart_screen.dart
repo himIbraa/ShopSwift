@@ -5,27 +5,29 @@ import '/widgets/widgets.dart';
 class CartScreen extends StatelessWidget {
   static const String routeName = '/cart';
 
+  const CartScreen({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => CartScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const CartScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Cart'),
+      appBar: const CustomAppBar(title: 'Cart'),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFFF5BA41),
+        color: const Color(0xFFF5BA41),
         elevation: 0,
-        child: Container(
+        child: SizedBox(
           height: 58,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.white),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                 onPressed: () {
                   Navigator.pushNamed(context, '/checkout');
                 },
@@ -56,7 +58,7 @@ class CartScreen extends StatelessWidget {
                         Navigator.pushNamed(context, '/home');
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 0, 0, 0),
+                        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -67,11 +69,11 @@ class CartScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.add,
                               color: Colors.white,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
                               'Add More Items',
                               style: Theme.of(context)
@@ -85,7 +87,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 CartProductCard(product: Product.products[6]),
@@ -93,7 +95,7 @@ class CartScreen extends StatelessWidget {
                 CartProductCard(product: Product.products[4]),
               ],
             ),
-            OrderSummary(),
+            const OrderSummary(),
           ],
         ),
       ),

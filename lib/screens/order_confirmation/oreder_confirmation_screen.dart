@@ -4,18 +4,20 @@ import '/widgets/widgets.dart';
 class OrderConfirmation extends StatelessWidget {
   static const String routeName = '/order-confirmation';
 
+  const OrderConfirmation({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => OrderConfirmation(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const OrderConfirmation(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Order Confirmation'),
-      bottomNavigationBar: CustomNavBar(),
+      appBar: const CustomAppBar(title: 'Order Confirmation'),
+      bottomNavigationBar: const CustomNavBar(),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
@@ -23,7 +25,7 @@ class OrderConfirmation extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  color: Color(0xFFF5BA41),
+                  color: const Color(0xFFF5BA41),
                   width: double.infinity,
                   height: 300,
                 ),
@@ -45,7 +47,7 @@ class OrderConfirmation extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .headline4!
+                        .headlineMedium!
                         .copyWith(color: Colors.white),
                   ),
                 ),
@@ -60,28 +62,28 @@ class OrderConfirmation extends StatelessWidget {
                     'Hi User Name,',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'Thank you for purchasing on Shop Swift.',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'ORDER CODE: #k321-ekd3',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  OrderSummary(),
-                  SizedBox(height: 20),
+                  const OrderSummary(),
+                  const SizedBox(height: 20),
                   Text(
                     'ORDER DETAILS',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  Divider(thickness: 2),
-                  SizedBox(height: 5),
+                  const Divider(thickness: 2),
+                  const SizedBox(height: 5),
                   ListView(
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                   ),
                 ],
               ),

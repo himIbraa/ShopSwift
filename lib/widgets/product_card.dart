@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width / widthFactor,
               height: 150,
               child: Image.network(
@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / widthFactor -
                     leftPosition,
                 height: 70,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
                       ),
                       Expanded(
                         child: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.add_circle,
                             color: Colors.white,
                           ),
@@ -94,14 +94,14 @@ class ProductCard extends StatelessWidget {
                       isWishlist
                           ? Expanded(
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.delete,
                                   color: Colors.white,
                                 ),
                                 onPressed: () {},
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                     ],
                   ),
                 ),

@@ -5,8 +5,8 @@ class MyShop extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => MyShop(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const MyShop(),
     );
   }
 
@@ -24,7 +24,7 @@ class MyShop extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFFF5BA41),
+        backgroundColor: const Color(0xFFF5BA41),
       ),
       body: SizedBox(
         child: Column(

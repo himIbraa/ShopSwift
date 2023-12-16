@@ -7,12 +7,12 @@ class AdminProductScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => AdminProductScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const AdminProductScreen(),
     );
   }
 
-  AdminProductScreen({Key? key}) : super(key: key);
+  const AdminProductScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class AdminProductScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFFF5BA41),
+        backgroundColor: const Color(0xFFF5BA41),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -36,14 +36,14 @@ class AdminProductScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewProductScreen()),
+                  MaterialPageRoute(builder: (context) => const NewProductScreen()),
                 );
               },
               child: SizedBox(
                 height: 100,
                 child: Card(
                   margin: EdgeInsets.zero,
-                  color: Color(0xFFF5BA41),
+                  color: const Color(0xFFF5BA41),
                   child: Row(
                     children: [
                       IconButton(
@@ -51,7 +51,7 @@ class AdminProductScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NewProductScreen()),
+                                builder: (context) => const NewProductScreen()),
                           );
                         },
                         icon: const Icon(
@@ -84,7 +84,7 @@ class AdminProductScreen extends StatelessWidget {
                       ),
                     );
                   }
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 },
               ),
             ),

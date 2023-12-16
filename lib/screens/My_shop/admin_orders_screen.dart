@@ -8,8 +8,8 @@ class OrdersScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => OrdersScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const OrdersScreen(),
     );
   }
 
@@ -27,9 +27,9 @@ class OrdersScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFFF5BA41),
+        backgroundColor: const Color(0xFFF5BA41),
       ),
-      body: Column(
+      body: const Column(
         children: [
           Expanded(
             child: OrderListView(),
@@ -201,7 +201,7 @@ class OrderCard extends StatelessWidget {
                             // Handle Deliver button press
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFF5BA41),
+                            backgroundColor: const Color(0xFFF5BA41),
                             minimumSize: const Size(150, 40),
                           ),
                           child: const Text(
@@ -216,7 +216,7 @@ class OrderCard extends StatelessWidget {
                             // Handle Accept button press
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFF5BA41),
+                            backgroundColor: const Color(0xFFF5BA41),
                             minimumSize: const Size(150, 40),
                           ),
                           child: const Text(
@@ -232,7 +232,7 @@ class OrderCard extends StatelessWidget {
                       // Handle Cancel button press
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 227, 227, 227),
+                      backgroundColor: const Color.fromARGB(255, 227, 227, 227),
                       minimumSize: const Size(150, 40),
                     ),
                     child: const Text(

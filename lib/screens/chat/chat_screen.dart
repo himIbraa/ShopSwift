@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class ChatScreen extends StatelessWidget {
   static const String routeName = '/chat';
 
+  const ChatScreen({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => ChatScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const ChatScreen(),
     );
   }
 
@@ -14,15 +16,15 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFF9E17E),
+        backgroundColor: const Color(0xFFF9E17E),
         title: Row(
           children: [
             Container(
-              padding: EdgeInsets.only(left: 2),
-              child: Icon(Icons.account_box_outlined, color: Colors.black),
+              padding: const EdgeInsets.only(left: 2),
+              child: const Icon(Icons.account_box_outlined, color: Colors.black),
             ),
-            SizedBox(width: 8.0),
-            Text(
+            const SizedBox(width: 8.0),
+            const Text(
               'User Name',
               style: TextStyle(color: Colors.black),
             ),
@@ -31,11 +33,11 @@ class ChatScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          DateIndicatorWidget('3 Nov'),
+          const DateIndicatorWidget('3 Nov'),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.all(8.0),
-              children: [
+              padding: const EdgeInsets.all(8.0),
+              children: const [
                 MessageWidget(
                     isMe: true,
                     text: 'Antique bookshelf still up?',
@@ -75,7 +77,7 @@ class ChatScreen extends StatelessWidget {
 
   Widget _buildMessageComposer() {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           Row(
@@ -84,15 +86,15 @@ class ChatScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color(
+                        color: const Color(
                             0xFFD3D9DC)), // Set the border color to #D3D9DC
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: 'message...',
@@ -102,7 +104,7 @@ class ChatScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.send),
+                        icon: const Icon(Icons.send),
                         onPressed: () {
                           // Handle send button pressed
                         },
@@ -113,7 +115,7 @@ class ChatScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
         ],
       ),
     );
@@ -126,8 +128,8 @@ class MessageWidget extends StatelessWidget {
   final String time;
   final bool delivered;
 
-  MessageWidget(
-      {required this.isMe,
+  const MessageWidget(
+      {super.key, required this.isMe,
       required this.text,
       required this.time,
       this.delivered = false});
@@ -135,25 +137,25 @@ class MessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment:
             isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           Container(
             decoration: BoxDecoration(
-              color: isMe ? Color(0xFFF9E17E) : Colors.white,
+              color: isMe ? const Color(0xFFF9E17E) : Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12.0),
-                topRight: Radius.circular(12.0),
-                bottomLeft: isMe ? Radius.circular(12.0) : Radius.circular(0.0),
+                topLeft: const Radius.circular(12.0),
+                topRight: const Radius.circular(12.0),
+                bottomLeft: isMe ? const Radius.circular(12.0) : const Radius.circular(0.0),
                 bottomRight:
-                    isMe ? Radius.circular(0.0) : Radius.circular(12.0),
+                    isMe ? const Radius.circular(0.0) : const Radius.circular(12.0),
               ),
               border: Border.all(
-                  color: Color(0xFFD3D9DC)), // Set the border color to #D3D9DC
+                  color: const Color(0xFFD3D9DC)), // Set the border color to #D3D9DC
             ),
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -166,13 +168,13 @@ class MessageWidget extends StatelessWidget {
                           fontSize: 16.0,
                           color: isMe ? Colors.black : Colors.black),
                     ),
-                    SizedBox(height: 4.0),
+                    const SizedBox(height: 4.0),
                     Text(
                       time,
-                      style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      style: const TextStyle(fontSize: 12.0, color: Colors.grey),
                     ),
                     if (isMe && delivered)
-                      Icon(Icons.done, size: 16.0, color: Colors.grey),
+                      const Icon(Icons.done, size: 16.0, color: Colors.grey),
                   ],
                 ),
               ],
@@ -187,23 +189,23 @@ class MessageWidget extends StatelessWidget {
 class DateIndicatorWidget extends StatelessWidget {
   final String date;
 
-  DateIndicatorWidget(this.date);
+  const DateIndicatorWidget(this.date, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 51.0,
       height: 26.0,
-      margin: EdgeInsets.symmetric(horizontal: 155.5, vertical: 10.0),
-      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 155.5, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       decoration: BoxDecoration(
-        color: Color(0xFF9A9A9A),
+        color: const Color(0xFF9A9A9A),
         borderRadius: BorderRadius.circular(100.0),
       ),
       child: Center(
         child: Text(
           date,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 12.0,
           ),

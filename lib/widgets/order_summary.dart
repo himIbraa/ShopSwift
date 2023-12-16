@@ -9,11 +9,11 @@ class OrderSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Divider(
+        const Divider(
           thickness: 2,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
           child: Column(
             children: [
               Row(
@@ -33,7 +33,7 @@ class OrderSummary extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 60,
-              decoration: BoxDecoration(color: Color.fromARGB(255, 0, 0, 0)),
+              decoration: const BoxDecoration(color: Color.fromARGB(255, 0, 0, 0)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(

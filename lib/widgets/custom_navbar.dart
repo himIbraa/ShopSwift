@@ -10,12 +10,12 @@ class CustomNavBar extends StatelessWidget {
     return SizedBox(
       height: 58.0, // Adjust the height as needed
       child: BottomAppBar(
-        color: Color(0xFFF5BA41),
+        color: const Color(0xFFF5BA41),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home,
                 color: Colors.white,
               ),
@@ -24,7 +24,7 @@ class CustomNavBar extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.shopping_cart,
                 color: Colors.white,
               ),
@@ -33,7 +33,7 @@ class CustomNavBar extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.person,
                 color: Colors.white,
               ),
@@ -42,7 +42,7 @@ class CustomNavBar extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.apps,
                 color: Colors.white,
               ),
@@ -51,7 +51,7 @@ class CustomNavBar extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.message,
                 color: Colors.white,
               ),

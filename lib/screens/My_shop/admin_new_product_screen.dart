@@ -6,8 +6,8 @@ class NewProductScreen extends StatefulWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => NewProductScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const NewProductScreen(),
     );
   }
 
@@ -39,7 +39,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFFF5BA41),
+        backgroundColor: const Color(0xFFF5BA41),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -81,7 +81,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
         height: 100,
         child: Card(
           margin: EdgeInsets.zero,
-          color: Color(0xFFF5BA41),
+          color: const Color(0xFFF5BA41),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -108,10 +108,10 @@ class _NewProductScreenState extends State<NewProductScreen> {
   }
 
   void _selectImage() async {
-    ImagePicker _picker = ImagePicker();
-    final XFile? _image = await _picker.pickImage(source: ImageSource.gallery);
+    ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    if (_image == null) {
+    if (image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('No image was selected.'),
@@ -138,7 +138,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
           print('Saved');
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFF5BA41),
+          backgroundColor: const Color(0xFFF5BA41),
         ),
         child: const Text(
           'Save',

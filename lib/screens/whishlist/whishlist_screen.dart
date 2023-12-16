@@ -5,24 +5,26 @@ import 'package:shopswift/widgets/widgets.dart';
 class WhishlistScreen extends StatelessWidget {
   static const String routeName = '/whishlist';
 
+  const WhishlistScreen({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => WhishlistScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const WhishlistScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Wishlist'),
-      bottomNavigationBar: CustomNavBar(),
+      appBar: const CustomAppBar(title: 'Wishlist'),
+      bottomNavigationBar: const CustomNavBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: Product.products.length,
               itemBuilder: (BuildContext context, int index) {
                 return Column(
@@ -33,7 +35,7 @@ class WhishlistScreen extends StatelessWidget {
                       leftPosition: 160,
                       isWishlist: true,
                     ),
-                    SizedBox(height: 8.0), // Adjust the height for the gap
+                    const SizedBox(height: 8.0), // Adjust the height for the gap
                   ],
                 );
               },

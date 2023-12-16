@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopswift/models/models.dart';
 import 'package:shopswift/screens/chat/chat_screen.dart';
-import 'package:shopswift/screens/login/login_screen.dart';
 import 'package:shopswift/screens/order_confirmation/oreder_confirmation_screen.dart';
 import 'package:shopswift/screens/screens.dart';
 
@@ -54,9 +53,9 @@ class AppRouter {
 
   static _errorRoute() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: '/error'),
+      settings: const RouteSettings(name: '/error'),
       builder: (_) => Scaffold(
-        appBar: AppBar(title: Text("ERROR")),
+        appBar: AppBar(title: const Text("ERROR")),
       ),
     );
   }

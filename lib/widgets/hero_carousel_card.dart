@@ -4,20 +4,19 @@ import 'package:shopswift/models/models.dart';
 class HeroCarouselCard extends StatelessWidget {
   final Category? category;
   final Product? product;
-  const HeroCarouselCard({this.category, this.product});
+  const HeroCarouselCard({super.key, this.category, this.product});
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (this.product == null) {
+        if (product == null) {
           Navigator.pushNamed(context, '/catalog', arguments: category);
         }
-        ;
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 3, vertical: 25),
+        margin: const EdgeInsets.symmetric(horizontal: 3, vertical: 25),
         child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             child: Stack(
               children: <Widget>[
                 Image.network(
@@ -29,7 +28,7 @@ class HeroCarouselCard extends StatelessWidget {
                   left: 0.0,
                   right: 0.0,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
                           Color.fromARGB(200, 0, 0, 0),
@@ -40,11 +39,11 @@ class HeroCarouselCard extends StatelessWidget {
                       ),
                     ),
                     padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                     child: Text(product == null ? category!.name : ' ',
                         style: Theme.of(context)
                             .textTheme
-                            .headline5!
+                            .headlineSmall!
                             .copyWith(color: Colors.white)),
                   ),
                 ),

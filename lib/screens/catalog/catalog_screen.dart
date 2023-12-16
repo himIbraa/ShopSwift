@@ -7,13 +7,13 @@ class CatalogScreen extends StatelessWidget {
 
   static Route route({required Category category}) {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (_) => CatalogScreen(category: category),
     );
   }
 
   final Category category;
-  const CatalogScreen({required this.category});
+  const CatalogScreen({super.key, required this.category});
   @override
   Widget build(BuildContext context) {
     final List<Product> categoryProduct = Product.products
@@ -21,7 +21,7 @@ class CatalogScreen extends StatelessWidget {
         .toList();
     return Scaffold(
         appBar: CustomAppBar(title: category.name),
-        bottomNavigationBar: CustomNavBar(),
+        bottomNavigationBar: const CustomNavBar(),
         body: GridView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

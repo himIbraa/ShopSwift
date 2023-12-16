@@ -6,10 +6,12 @@ import 'package:shopswift/widgets/widgets.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
 
+  const HomeScreen({super.key});
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => HomeScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const HomeScreen(),
     );
   }
 
@@ -48,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'ShopSwift'),
-      bottomNavigationBar: CustomNavBar(),
+      appBar: const CustomAppBar(title: 'ShopSwift'),
+      bottomNavigationBar: const CustomNavBar(),
       body: Column(
         children: [
           CarouselSlider(
@@ -82,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: 2,
                 itemBuilder: (context, index) {
                   return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                     ),
                     itemCount: index == 0
@@ -111,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _animateToPage(int index) {
     _pageController.animateToPage(
       index,
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.easeInOut, // Adjust the curve as needed
     );
   }
@@ -133,13 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
               color: isSelected ? Colors.blue : Colors.black,
             ),
           ),
-          SizedBox(height: 4.0),
+          const SizedBox(height: 4.0),
           Container(
             height: isSelected ? 2.0 : 0.0,
             width: 120.0,
             color: Colors.blue,
           ),
-          SizedBox(height: 4.0),
+          const SizedBox(height: 4.0),
         ],
       ),
     );

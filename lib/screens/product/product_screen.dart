@@ -8,42 +8,42 @@ class ProductScreen extends StatelessWidget {
 
   static Route route({required Product product}) {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (_) => ProductScreen(product: product),
     );
   }
 
   final Product product;
-  const ProductScreen({required this.product});
+  const ProductScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: product.name),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFFF5BA41),
+        color: const Color(0xFFF5BA41),
         child: Container(
           height: 70,
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.share,
                   color: Colors.white,
                 ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.favorite,
                   color: Colors.white,
                 ),
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.white),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                 onPressed: () {},
                 child: Text(
                   'ADD TO CART',
@@ -75,7 +75,7 @@ class ProductScreen extends StatelessWidget {
               width: double.infinity,
               height: 50,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
@@ -96,7 +96,7 @@ class ProductScreen extends StatelessWidget {
                         product.name,
                         style: Theme.of(context)
                             .textTheme
-                            .headline6!
+                            .titleLarge!
                             .copyWith(color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -106,7 +106,7 @@ class ProductScreen extends StatelessWidget {
                       '${product.price} DA',
                       style: Theme.of(context)
                           .textTheme
-                          .headline6!
+                          .titleLarge!
                           .copyWith(color: Colors.white),
                     ),
                   ],
@@ -124,14 +124,14 @@ class ProductScreen extends StatelessWidget {
                   onTap: () {
                     // Handle profile picture click
                   },
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     radius: 35,
                     backgroundImage: NetworkImage(
                       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                     ),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -144,7 +144,7 @@ class ProductScreen extends StatelessWidget {
                             ),
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                   ],
                 ),
               ],
@@ -157,7 +157,7 @@ class ProductScreen extends StatelessWidget {
               initiallyExpanded: false,
               title: Text(
                 "Product Information",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               children: <Widget>[
                 ListTile(
@@ -167,7 +167,7 @@ class ProductScreen extends StatelessWidget {
                     'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris '
                     'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in '
                     'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ],
@@ -180,7 +180,7 @@ class ProductScreen extends StatelessWidget {
               initiallyExpanded: false,
               title: Text(
                 "Delivery Information",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               children: <Widget>[
                 ListTile(
@@ -190,7 +190,7 @@ class ProductScreen extends StatelessWidget {
                     'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris '
                     'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in '
                     'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ],

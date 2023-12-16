@@ -43,7 +43,7 @@ class CategoryCard extends StatelessWidget {
                 height: 70,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
@@ -60,7 +60,7 @@ class CategoryCard extends StatelessWidget {
                     children: [
                       Text(
                         category.name,
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),

@@ -7,26 +7,26 @@ class CategoryScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => CategoryScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (_) => const CategoryScreen(),
     );
   }
 
-  const CategoryScreen();
+  const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<Category> category = Category.categories.toList();
 
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Category',
       ),
-      bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar: const CustomNavBar(),
       body: SingleChildScrollView(
         child: ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: category.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(
@@ -35,7 +35,7 @@ class CategoryScreen extends StatelessWidget {
                   category: category[index],
                   widthFactor: 1.1,
                 ),
-                SizedBox(height: 18.0),
+                const SizedBox(height: 18.0),
               ],
             );
           },

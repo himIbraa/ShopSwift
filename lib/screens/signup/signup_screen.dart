@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _userNameTextController = TextEditingController();
   static const String routeName = '/signup';
+
+  SignUpScreen({super.key});
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (_) => SignUpScreen(),
     );
   }
@@ -17,7 +20,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false, // Set this property to false
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -27,12 +30,12 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/logo.png',
+                  '../../../assets/images/logo_no_background.png',
                   width: 260,
                   height: 240,
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Welcome',
                   style: TextStyle(
                     fontSize: 18,
@@ -40,19 +43,19 @@ class SignUpScreen extends StatelessWidget {
                     color: Color(0xFF4A7FCA),
                   ),
                 ),
-                SizedBox(height: 10),
-              Column(
-                children: [
-                  buildTextField('Username', Icons.person,false,
-                      _userNameTextController),
-                  buildTextField('Email', Icons.email,false,
-                      _userNameTextController),
-                  buildTextField('Password', Icons.lock,false,
-                      _userNameTextController),
-                ],
-              ),
-                SizedBox(height: 10),
-                Row(
+                const SizedBox(height: 10),
+                Column(
+                  children: [
+                    buildTextField('Username', Icons.person, false,
+                        _userNameTextController),
+                    buildTextField(
+                        'Email', Icons.email, false, _userNameTextController),
+                    buildTextField(
+                        'Password', Icons.lock, false, _userNameTextController),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.check, color: Colors.black, size: 16),
@@ -63,18 +66,18 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'By creating an account, you agree to our Terms of Service and Privacy Policy.',
                   style: TextStyle(fontSize: 12, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/login');
                   },
-                  child: Text(
+                  child: const Text(
                     'I have an account',
                     style: TextStyle(
                       fontSize: 12,
@@ -83,19 +86,19 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFF5BA41),
+                    backgroundColor: const Color(0xFFF5BA41),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
                       horizontal: 20.0,
                       vertical: 10.0,
                     ),
@@ -107,19 +110,19 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OutlinedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
                   },
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.black, width: 2.0),
+                    side: const BorderSide(color: Colors.black, width: 2.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
                       horizontal: 30.0,
                       vertical: 10.0,
                     ),
@@ -138,7 +141,8 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
-  Widget buildTextField(String label, IconData icon,bool isPasswordType,
+
+  Widget buildTextField(String label, IconData icon, bool isPasswordType,
       TextEditingController controller) {
     return TextField(
       controller: controller,
@@ -167,26 +171,27 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-
   Widget buildPrefixIcon(IconData icon) {
-    return Container(
+    return SizedBox(
       width: 48,
       child: Row(
         children: [
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Icon(icon, color: Colors.black),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Container(
             width: 2,
             height: 50,
             color: Colors.black,
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
         ],
       ),
     );
   }
-  Container firebaseUIButton(BuildContext context, String title, Function onTap) {
+
+  Container firebaseUIButton(
+      BuildContext context, String title, Function onTap) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 50,
@@ -196,11 +201,6 @@ class SignUpScreen extends StatelessWidget {
         onPressed: () {
           onTap();
         },
-        child: Text(
-          title,
-          style: const TextStyle(
-              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
-        ),
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.pressed)) {
@@ -209,12 +209,14 @@ class SignUpScreen extends StatelessWidget {
               return Colors.white;
             }),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)))),
+        child: Text(
+          title,
+          style: const TextStyle(
+              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+        ),
       ),
     );
   }
 }
-
-
-
-
