@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shopswift/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 
-// ignore: must_be_immutable
-class LoginScreen extends StatelessWidget {
-  final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _emailTextController = TextEditingController();
-
+class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
 
-  LoginScreen({super.key});
+  LoginScreen({Key? key}) : super(key: key);
 
   static Route route() {
     return MaterialPageRoute(
@@ -16,6 +13,15 @@ class LoginScreen extends StatelessWidget {
       builder: (_) => LoginScreen(),
     );
   }
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +36,9 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  '../../../assets/images/logo_no_background.png',
-                  width: 260,
-                  height: 240,
+                  'assets/logo.png',
+                  width: 160,
+                  height: 160,
                 ),
                 const SizedBox(height: 10),
                 Column(
@@ -55,20 +61,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     buildTextField(
-                        'Email', Icons.email, false, _emailTextController),
+                        'Email', Icons.email, false, _emailController),
                     buildTextField(
-                        'Password', Icons.lock, true, _passwordTextController),
-                    firebaseUIButton(context, "Log In", () {
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: _emailTextController.text,
-                              password: _passwordTextController.text)
-                          .then((value) {
-                        Navigator.pushNamed(context, '/home');
-                      }).onError((error, stackTrace) {
-                        print("Error ${error.toString()}");
-                      });
-                    }),
+                        'Password', Icons.lock, true, _passwordController),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -103,9 +98,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
-                    //
-                  },
+                  onPressed:_signIn,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF5BA41),
                     shape: RoundedRectangleBorder(
@@ -115,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                   child: const Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 20.0,
-                      vertical: 15.0, // Adjusted height
+                      vertical: 15.0,
                     ),
                     child: Text(
                       'LogIn',
@@ -137,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                   child: const Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 30.0,
-                      vertical: 15.0, // Adjusted height
+                      vertical: 15.0,
                     ),
                     child: Text(
                       'Skip',
@@ -155,48 +148,31 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildTextField(String label, IconData icon, bool isPasswordType,
       TextEditingController controller) {
-    return TextField(
-      controller: controller,
-      obscureText: isPasswordType,
-      enableSuggestions: !isPasswordType,
-      autocorrect: !isPasswordType,
-      cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white.withOpacity(0.9)),
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          icon,
-          color: Colors.white70,
-        ),
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
-        filled: true,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        fillColor: Colors.white.withOpacity(0.3),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
-            borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
-      ),
-      keyboardType: isPasswordType
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
-    );
-  }
-
-  Widget buildPrefixIcon(IconData icon) {
-    return SizedBox(
-      width: 48,
-      child: Row(
-        children: [
-          const SizedBox(width: 10),
-          Icon(icon, color: Colors.black),
-          const SizedBox(width: 8),
-          Container(
-            width: 2,
-            height: 50,
-            color: Colors.black,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: TextField(
+        controller: controller,
+        obscureText: isPasswordType,
+        enableSuggestions: !isPasswordType,
+        autocorrect: !isPasswordType,
+        cursorColor: Colors.black,
+        style: TextStyle(color: Colors.black87.withOpacity(0.9)),
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            icon,
+            color: Colors.black87,
           ),
-          const SizedBox(width: 4),
-        ],
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.black87.withOpacity(0.9)),
+          filled: true,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          fillColor: Colors.white.withOpacity(0.3),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(width: 0, style: BorderStyle.solid),
+          ),
+        ),
+        keyboardType: isPasswordType ? TextInputType.visiblePassword : TextInputType.emailAddress,
       ),
     );
   }
@@ -207,10 +183,11 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: ElevatedButton(
         onPressed: () {
-          // Handle button click
+          // Social login logic here
         },
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black, backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
           minimumSize: const Size.fromHeight(60),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
@@ -233,34 +210,52 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+  void _signIn() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
 
-  Container firebaseUIButton(
-      BuildContext context, String title, Function onTap) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 50,
-      margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
-      child: ElevatedButton(
-        onPressed: () {
-          onTap();
-        },
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.pressed)) {
-                return Colors.black26;
-              }
-              return Colors.white;
-            }),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)))),
-        child: Text(
-          title,
-          style: const TextStyle(
-              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
-        ),
-      ),
+    if (email.isEmpty || password.isEmpty) {
+      _showErrorDialog('Please fill in all fields');
+      return;
+    }
+
+    try {
+      User? user = await _auth.signInWithEmailAndPassword(email, password);
+      if (user != null) {
+        // Login successful, navigate to the home screen
+        Navigator.pushNamed(context, '/home');
+      }
+    } on FirebaseAuthException catch (e) {
+      String message = 'Invalid email or password'; // Default error message
+
+      // Customize the error message based on the error code if needed
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        message = 'Invalid email or password';
+      } else if (e.code == 'network-request-failed') {
+        message = 'Network error, please try again later.';
+      }
+
+      _showErrorDialog(message);
+    }
+  }
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss dialog
+              },
+            ),
+          ],
+        );
+      },
     );
   }
+
 }

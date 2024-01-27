@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopswift/blocs/blocs.dart';
 import 'package:shopswift/models/product_model.dart';
+import 'package:shopswift/models/whishlist_model.dart';
 import 'package:shopswift/widgets/widgets.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -35,20 +38,41 @@ class ProductScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
+              BlocBuilder<WhishlistBloc, WhishlistState>(
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed: () {
+                      context
+                          .read<WhishlistBloc>()
+                          .add(AddWhishlistProduct(product));
+                      final snackbar =
+                          SnackBar(content: Text('Product added to wishlist'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    },
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                    ),
+                  );
+                },
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                onPressed: () {},
-                child: Text(
-                  'ADD TO CART',
-                  style: Theme.of(context).textTheme.bodyLarge!,
-                ),
+              BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {
+                      context.read<CartBloc>().add(CartProductAdded(product));
+                      final snackbar =
+                          SnackBar(content: Text('Product added to cart'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    },
+                    child: Text(
+                      'ADD TO CART',
+                      style: Theme.of(context).textTheme.bodyLarge!,
+                    ),
+                  );
+                },
               )
             ],
           ),
@@ -112,7 +136,6 @@ class ProductScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
             ),
           ),
           Padding(

@@ -1,29 +1,40 @@
-/*part of 'whishlist_bloc.dart';
+part of 'whishlist_bloc.dart';
 
-@immutable
+
 abstract class WhishlistEvent extends Equatable {
   const WhishlistEvent();
-}
 
-class StartWhishlist extends WhishlistEvent {
   @override
   List<Object> get props => [];
 }
 
-class AddProductToWhishlist extends WhishlistEvent {
+class StartWhishlist extends WhishlistEvent {}
+
+
+
+
+
+
+
+class AddWhishlistProduct extends WhishlistEvent {
   final Product product;
 
-  const AddProductToWhishlist(this.product);
+  const AddWhishlistProduct(this.product);
 
   @override
   List<Object> get props => [product];
 }
 
-class RemoveProductFromWhishlist extends WhishlistEvent {
+
+
+
+
+
+class RemoveWhishlistProduct extends WhishlistEvent {
   final Product product;
 
-  const RemoveProductFromWhishlist(this.product);
+  const RemoveWhishlistProduct(this.product);
 
   @override
   List<Object> get props => [product];
-}*/
+}

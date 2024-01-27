@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
@@ -7,12 +6,11 @@ class User extends Equatable {
   final String email;
   final String password;
 
-
   const User({
     this.id,
     this.fullName = '',
     this.email = '',
-    this.password='',
+    this.password = '',
   });
 
   User copyWith({
@@ -26,17 +24,6 @@ class User extends Equatable {
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       password: password ?? this.password,
-
-    );
-  }
-
-  factory User.fromSnapshot(DocumentSnapshot snap) {
-    return User(
-      id: snap.id,
-      fullName: snap['fullName'],
-      email: snap['email'],
-      password: snap['password'],
-
     );
   }
 
@@ -45,11 +32,9 @@ class User extends Equatable {
       'fullName': fullName,
       'email': email,
       'password': password,
-
     };
   }
 
   @override
-  List<Object?> get props =>
-      [id, fullName, email, password];
+  List<Object?> get props => [id, fullName, email, password];
 }

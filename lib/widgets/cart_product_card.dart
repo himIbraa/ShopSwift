@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopswift/blocs/blocs.dart';
 import 'package:shopswift/models/models.dart';
 
 class CartProductCard extends StatelessWidget {
   final Product product;
+  final int quantity;
 
-  const CartProductCard({Key? key, required this.product}) : super(key: key);
+  const CartProductCard({Key? key, required this.product ,required this.quantity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class CartProductCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(width: 20),
+          SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,32 +46,43 @@ class CartProductCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 10),
+
+          SizedBox(width: 10),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               color: Colors.grey.shade200,
             ),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove),
-                  color: Colors.black,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    '1',
-                    style: Theme.of(context).textTheme.bodyLarge!,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.add),
-                  color: Colors.black,
-                ),
-              ],
+            child: BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) {
+                return Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        context
+                            .read<CartBloc>()
+                            .add(CartProductRemoved(product));
+                      },
+                      icon: const Icon(Icons.remove),
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        '${quantity}',
+                        style: Theme.of(context).textTheme.bodyLarge!,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        context.read<CartBloc>().add(CartProductAdded(product));
+                      },
+                      icon: const Icon(Icons.add),
+                      color: Colors.black,
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],

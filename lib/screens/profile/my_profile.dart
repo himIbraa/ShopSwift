@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shopswift/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class MyProfile extends StatelessWidget {
+import '../../widgets/widgets.dart';
+
+
+class MyProfile extends StatefulWidget {
   static const String routeName = '/myprofile';
 
-  const MyProfile({super.key});
+  const MyProfile({Key? key}) : super(key: key);
 
   static Route route() {
     return MaterialPageRoute(
@@ -14,43 +17,63 @@ class MyProfile extends StatelessWidget {
   }
 
   @override
+  _MyProfileState createState() => _MyProfileState();
+}
+
+class _MyProfileState extends State<MyProfile> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'My Profile'),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(), // Disable scrolling
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 0),
-              const CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-                ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 80), // Adjust this size to push content below the logout icon if needed
+                  const CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(
+                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                  const Text(
+                    'Test2',
+                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10.0),
+                  buildDetailBox('Test2'),
+                  buildDetailBox('test2@email.com'),
+                  buildDetailBox('Enter your Address'),
+                  buildDetailBox('Enter your Phone number'),
+                  const SizedBox(height: 20),
+                  buildButton('Change Password', () {}),
+                  const SizedBox(height: 1.0),
+                  buildButton('My Shop', () {
+                    Navigator.pushNamed(context, '/my-shop');
+                  }),
+                  const SizedBox(height: 1.0),
+                ],
               ),
-              const SizedBox(height: 10.0),
-              const Text(
-                'User Name',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10.0),
-              buildDetailBox('User Name'),
-              buildDetailBox('email@email.com'),
-              buildDetailBox('Address'),
-              buildDetailBox('Phone number'),
-              const SizedBox(height: 20),
-              buildButton('Change Password', () {}),
-              const SizedBox(height: 1.0),
-              buildButton('My Shop', () {
-                Navigator.pushNamed(context, '/my-shop');
-              }),
-            ],
+            ),
           ),
-        ),
+          Positioned(
+            top: AppBar().preferredSize.height, // Position right below the AppBar
+            right: 16, // Right padding
+            child: IconButton(
+              icon: const Icon(Icons.logout, color: Colors.black),
+              onPressed: () {
+                // FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, '/login');
+              },
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: const CustomNavBar(),
     );
@@ -71,7 +94,7 @@ class MyProfile extends StatelessWidget {
             label,
             style: const TextStyle(fontSize: 18.0),
           ),
-          Icon(Icons.edit, color: Colors.grey[500]),
+          const Icon(Icons.edit, color: Colors.grey),
         ],
       ),
     );

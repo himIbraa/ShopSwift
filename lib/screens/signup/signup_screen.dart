@@ -1,25 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shopswift/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 
-// ignore: must_be_immutable
-class SignUpScreen extends StatelessWidget {
-  final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _userNameTextController = TextEditingController();
+class SignUpScreen extends StatefulWidget {
   static const String routeName = '/signup';
 
-  SignUpScreen({super.key});
+  const SignUpScreen({Key? key}) : super(key: key);
 
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => SignUpScreen(),
+      builder: (_) => const SignUpScreen(),
     );
+  }
+
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _userNameController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, // Set this property to false
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF5F5F5),
       body: SingleChildScrollView(
         child: Center(
@@ -30,9 +46,9 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  '../../../assets/images/logo_no_background.png',
-                  width: 260,
-                  height: 240,
+                  'assets/logo.png',
+                  width: 170,
+                  height: 170,
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -44,95 +60,21 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Column(
-                  children: [
-                    buildTextField('Username', Icons.person, false,
-                        _userNameTextController),
-                    buildTextField(
-                        'Email', Icons.email, false, _userNameTextController),
-                    buildTextField(
-                        'Password', Icons.lock, false, _userNameTextController),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.check, color: Colors.black, size: 16),
-                    SizedBox(width: 8),
-                    Text(
-                      'Receive Updates',
-                      style: TextStyle(fontSize: 12, color: Colors.black),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'By creating an account, you agree to our Terms of Service and Privacy Policy.',
-                  style: TextStyle(fontSize: 12, color: Colors.black),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                  child: const Text(
-                    'I have an account',
-                    style: TextStyle(
-                      fontSize: 12,
-                      decoration: TextDecoration.underline,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
+                buildTextField('Username', Icons.person, false, _userNameController),
+                buildTextField('Email', Icons.email, false, _emailController),
+                buildTextField('Password', Icons.lock, true, _passwordController),
+                const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
+                  onPressed: _signUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF5BA41),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
+                    primary: const Color(0xFFF5BA41), // Background color
+                    onPrimary: Colors.white, // Text Color (Foreground color)
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                      vertical: 10.0,
-                    ),
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  child: const Text('Sign Up'),
                 ),
-                const SizedBox(height: 10),
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.black, width: 2.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 10.0,
-                    ),
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/login'),
+                  child: const Text('I have an account'),
                 ),
               ],
             ),
@@ -142,81 +84,83 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget buildTextField(String label, IconData icon, bool isPasswordType,
-      TextEditingController controller) {
-    return TextField(
-      controller: controller,
-      obscureText: isPasswordType,
-      enableSuggestions: !isPasswordType,
-      autocorrect: !isPasswordType,
-      cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white.withOpacity(0.9)),
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          icon,
-          color: Colors.white70,
-        ),
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
-        filled: true,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        fillColor: Colors.white.withOpacity(0.3),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
-            borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
-      ),
-      keyboardType: isPasswordType
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
-    );
-  }
-
-  Widget buildPrefixIcon(IconData icon) {
-    return SizedBox(
-      width: 48,
-      child: Row(
-        children: [
-          const SizedBox(width: 10),
-          Icon(icon, color: Colors.black),
-          const SizedBox(width: 8),
-          Container(
-            width: 2,
-            height: 50,
-            color: Colors.black,
+  Widget buildTextField(String label, IconData icon, bool isPasswordType, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: TextField(
+        controller: controller,
+        obscureText: isPasswordType,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: const BorderSide(),
           ),
-          const SizedBox(width: 4),
-        ],
-      ),
-    );
-  }
-
-  Container firebaseUIButton(
-      BuildContext context, String title, Function onTap) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 50,
-      margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
-      child: ElevatedButton(
-        onPressed: () {
-          onTap();
-        },
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.pressed)) {
-                return Colors.black26;
-              }
-              return Colors.white;
-            }),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)))),
-        child: Text(
-          title,
-          style: const TextStyle(
-              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
     );
   }
+
+  void _signUp() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      _showErrorDialog('Please fill in all fields');
+      return;
+    }
+
+    try {
+      User? user = await _auth.signUpWithEmailAndPassword(email, password);
+      if (user != null) {
+        // User creation successful, navigate to the home screen
+        Navigator.pushNamed(context, '/home');
+      }
+    } on FirebaseAuthException catch (e) {
+      String message = 'An error occurred during sign up'; // Default error message
+
+      // Customize the error message based on the error code
+      switch (e.code) {
+        case 'email-already-in-use':
+          message = 'This email is already in use';
+          break;
+        case 'invalid-email':
+          message = 'This is not a valid email address';
+          break;
+        case 'operation-not-allowed':
+          message = 'Email/password accounts are not enabled';
+          break;
+        case 'weak-password':
+          message = 'The password is too weak';
+          break;
+      }
+
+      _showErrorDialog(message);
+    } catch (e) {
+      // Handle any other errors
+      _showErrorDialog('An unexpected error occurred. Please try again.');
+    }
+  }
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
 }
